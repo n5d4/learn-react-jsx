@@ -1,56 +1,33 @@
 import './App.css'
-import componentsImg from './assets/react.svg'
 import {CORE_CONCEPTS} from "./data.js";
-
-
-const reactDescriptions = ['Fundamental', 'Crucial', 'Core']
-
-function genRandomInt(max) {
-    return Math.floor(Math.random() * (max + 1));
-}
-
-function Header() {
-    const description = reactDescriptions[genRandomInt(reactDescriptions.length - 1)]
-
-    return (
-        <header>
-            <h1>React Essentials</h1>
-            <p>
-                {description} React concepts you will need for almost any app you are going to build!
-            </p>
-        </header>
-    );
-}
-
-
-function CoreConcept({image, title, description}) {
-    return <li>
-        <img src={image} alt={title}></img>
-        <h3>{title}</h3>
-        <p>{description}</p>
-    </li>
-}
-
-function CoreConceptList({ CORE_CONCEPTS }) {
-    return (
-        <ul>
-            {CORE_CONCEPTS.map((concept, index) => (
-                <CoreConcept key={index} {...concept} />
-            ))}
-        </ul>
-    )
-}
+import Header from "./components/Header/Header.jsx";
+import CoreConceptList from "./components/CoreConcept/CoreConcept.jsx";
+import TabButton from "./components/TabButton/TabButton.jsx";
 
 function App() {
+    function handleSelect(selectedButton) {
+
+    console.log(selectedButton)
+    }
+
     return (
         <>
             <Header/>
             <main>
                 <div id="core-concepts">
                     <h2>Core Concepts</h2>
-                    <CoreConceptList CORE_CONCEPTS={CORE_CONCEPTS} />
+                    <CoreConceptList CORE_CONCEPTS={CORE_CONCEPTS}/>
                 </div>
+                <section id="examples">
+                    <h2>Examples</h2>
+                    <menu>
+                        <TabButton onClick={() => handleSelect('components')}>Components</TabButton>
+                        <TabButton onClick={() => handleSelect('jsx')}>JSX</TabButton>
+                        <TabButton onClick={() => handleSelect('props')}>Props</TabButton>
+                        <TabButton onClick={() => handleSelect('state')}>State</TabButton>
+                    </menu>
 
+                </section>
             </main>
         </>
     )
